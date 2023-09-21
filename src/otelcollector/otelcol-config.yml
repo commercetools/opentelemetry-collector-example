@@ -14,10 +14,19 @@ receivers:
 
 exporters:
   logging:
-
 processors:
   batch:
   transform:
+    trace_statements:
+      - context: span
+        statements:
+          - truncate_all(attributes, 4095)
+          - truncate_all(resource.attributes, 4095)
+    log_statements:
+      - context: log
+        statements:
+          - truncate_all(attributes, 4095)
+          - truncate_all(resource.attributes, 4095)
     metric_statements:
       - context: metric
         statements:
@@ -36,7 +45,7 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
+      processors: [transform, batch]
       exporters: [logging, spanmetrics]
     metrics:
       receivers: [otlp, spanmetrics]
@@ -44,5 +53,5 @@ service:
       exporters: [logging]
     logs:
       receivers: [otlp]
-      processors: [batch]
+      processors: [transform, batch]
       exporters: [logging]
