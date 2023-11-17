@@ -4,16 +4,16 @@
 # do not delete this file
 
 exporters:
-  otlp/2:
-    endpoint: ${NEW_RELIC_OTLP_ENDPOINT}
+  otlphttp:
+    endpoint: https://your-endpoint.live.dynatrace.com/api/v2/otlp
     headers:
-      api-key: ${NEW_RELIC_LICENSE_KEY}
+      Authorization: "Api-Token dt0c01.your.key"
 
 service:
   pipelines:
     traces:
-      exporters: [otlp, logging, spanmetrics, otlp/2]
+      exporters: [otlp, logging, spanmetrics, otlphttp]
     metrics:
-      exporters: [prometheus, logging, otlp/2]
+      exporters: [prometheus, logging, otlphttp]
     logs:
-      exporters: [logging, otlp/2]
+      exporters: [logging, otlphttp]
