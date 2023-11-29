@@ -47,6 +47,10 @@ processors:
           - process.runtime.jvm.system.cpu.load_1m
           - process.runtime.jvm.gc.duration
           - jvm.gc.pause
+          - spring.security.filterchains
+          - spring.security.http.secured.requests
+          - spring.security.authorizations
+          - http.server.requests
 
 connectors:
   spanmetrics:
