@@ -16,4 +16,4 @@ service:
     metrics:
       exporters: [prometheus, logging, otlp/2]
     logs:
-      exporters: [ logging, otlp/2 ]
+      exporters: [logging, otlp/2]

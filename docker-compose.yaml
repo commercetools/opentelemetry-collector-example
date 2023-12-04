@@ -69,7 +69,7 @@ services:
     volumes:
       - ./src/otelcollector/otelcol-config.yml:/etc/otelcol-config.yml
       - ./src/otelcollector/otelcol-observability.yml:/etc/otelcol-observability.yml
-      - ./src/otelcollector/otelcol-config-extras.yml:/etc/otelcol-config-extras.yml
+      - ./src/otelcollector/otelcol-config-newrelic.yml:/etc/otelcol-config-newrelic.yml
       - ./src/otelcollector/otelcol-config-dynatrace.yml:/etc/otelcol-config-dynatrace.yml
     ports:
       - "4317:4317"     # OTLP over gRPC receiver
