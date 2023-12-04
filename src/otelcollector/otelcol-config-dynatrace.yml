@@ -1,0 +1,35 @@
+exporters:
+  otlphttp/dynatrace:
+    endpoint: ${DYNATRACE_OTLP_ENDPOINT}
+    headers:
+      Authorization: ${DYNATRACE_API_TOKEN}
+
+processors:
+  cumulativetodelta:
+  filter:
+    metrics:
+      exclude:
+        match_type: strict
+        metric_names:
+          - queueSize
+          - duration
+          - http.server.duration
+          - http.client.duration
+          - process.runtime.jvm.system.cpu.load_1m
+          - process.runtime.jvm.gc.duration
+          - jvm.gc.pause
+          - spring.security.filterchains
+          - spring.security.http.secured.requests
+          - spring.security.authorizations
+          - http.server.requests
+
+
+service:
+  pipelines:
+    traces:
+      exporters: [otlp, logging, spanmetrics, otlphttp/dynatrace]
+    metrics:
+      processors: [filter, cumulativetodelta, transform, batch]
+      exporters: [prometheus, logging, otlphttp/dynatrace]
+    logs:
+      exporters: [logging, otlphttp/dynatrace]

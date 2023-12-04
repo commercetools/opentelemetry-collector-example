@@ -16,7 +16,6 @@ exporters:
   logging:
 processors:
   batch:
-  cumulativetodelta:
   transform:
     trace_statements:
       - context: span
@@ -41,16 +40,6 @@ processors:
         match_type: strict
         metric_names:
           - queueSize
-          - duration
-          - http.server.duration
-          - http.client.duration
-          - process.runtime.jvm.system.cpu.load_1m
-          - process.runtime.jvm.gc.duration
-          - jvm.gc.pause
-          - spring.security.filterchains
-          - spring.security.http.secured.requests
-          - spring.security.authorizations
-          - http.server.requests
 
 connectors:
   spanmetrics:
@@ -63,7 +52,7 @@ service:
       exporters: [logging, spanmetrics]
     metrics:
       receivers: [otlp, spanmetrics]
-      processors: [filter, cumulativetodelta, transform, batch]
+      processors: [filter, transform, batch]
       exporters: [logging]
     logs:
       receivers: [otlp]
