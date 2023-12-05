@@ -10,9 +10,18 @@ To start it use the following command:
 docker-compose --env-file .env up --no-build
 ```
 
+## NewRelic
 The collector is preconfigured to export metric, traces and log entries to NewRelic.
-In order to activate it add your NewRelic api key to the `.env` file and restart the
-containers.
+In order to activate it add your NewRelic api key to the `.env` file. Make sure OpenTelemetry Collector service 
+in [docker-compose.yml](./docker-compose.yaml) has the NewRelic command uncommented.
+Restart the containers.
+
+## Dynatrace
+The collector is preconfigured to export metric, traces and log entries to Dynatrace.
+In order to activate it add your Dynatrace OTLP endpoint and Dynatrace API key to the `.env` file.
+Make sure OpenTelemetry Collector service 
+in [docker-compose.yml](./docker-compose.yaml) has the Dynatrace command uncommented.
+Restart the containers.
 
 ## Jaeger UI
 
