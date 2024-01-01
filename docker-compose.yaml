@@ -63,14 +63,17 @@ services:
           memory: 125M
     restart: unless-stopped
 #    New Relic
-    command: [ "--config=/etc/otelcol-config.yml", "--config=/etc/otelcol-observability.yml", "--config=/etc/otelcol-config-newrelic.yml" ]
+#    command: [ "--config=/etc/otelcol-config.yml", "--config=/etc/otelcol-observability.yml", "--config=/etc/otelcol-config-newrelic.yml" ]
 #    Dynatrace
 #    command: [ "--config=/etc/otelcol-config.yml", "--config=/etc/otelcol-observability.yml", "--config=/etc/otelcol-config-dynatrace.yml" ]
+#   Datadog
+    command: [ "--config=/etc/otelcol-config.yml", "--config=/etc/otelcol-observability.yml", "--config=/etc/otelcol-config-datadog.yml" ]
     volumes:
       - ./src/otelcollector/otelcol-config.yml:/etc/otelcol-config.yml
       - ./src/otelcollector/otelcol-observability.yml:/etc/otelcol-observability.yml
       - ./src/otelcollector/otelcol-config-newrelic.yml:/etc/otelcol-config-newrelic.yml
       - ./src/otelcollector/otelcol-config-dynatrace.yml:/etc/otelcol-config-dynatrace.yml
+      - ./src/otelcollector/otelcol-config-datadog.yml:/etc/otelcol-config-datadog.yml
     ports:
       - "4317:4317"     # OTLP over gRPC receiver
       - "4318:4318"     # OTLP over HTTP receiver
@@ -84,6 +87,8 @@ services:
       - NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
       - DYNATRACE_OTLP_ENDPOINT=${DYNATRACE_OTLP_ENDPOINT}
       - DYNATRACE_API_TOKEN=${DYNATRACE_API_TOKEN}
+      - DATADOG_API_KEY=${DATADOG_API_KEY}
+      - DATADOG_SITE=${DATADOG_SITE}
 
   # Prometheus
   prometheus:
