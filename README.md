@@ -23,6 +23,14 @@ Make sure OpenTelemetry Collector service
 in [docker-compose.yml](./docker-compose.yaml) has the Dynatrace command uncommented.
 Restart the containers.
 
+## Datadog
+The collector is preconfigured to export metric, traces and log entries to Datadog.
+In order to activate it add your Datadog API key to the `.env` file. In case you're
+registered under another region than EU, update your Datadog site in the `.env` file as well.
+Make sure OpenTelemetry Collector service
+in [docker-compose.yml](./docker-compose.yaml) has the Datadog command uncommented.
+Restart the containers.
+
 ## Jaeger UI
 
 http://localhost:16686

@@ -1,0 +1,20 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+# extra settings to be merged into OpenTelemetry Collector configuration
+# do not delete this file
+
+exporters:
+  datadog:
+    api:
+      site: ${DATADOG_SITE}
+      key: ${DATADOG_API_KEY}
+      fail_on_invalid_key: true
+
+service:
+  pipelines:
+    traces:
+      exporters: [otlp, logging, spanmetrics, datadog]
+    metrics:
+      exporters: [prometheus, logging, datadog]
+    logs:
+      exporters: [logging, datadog]
