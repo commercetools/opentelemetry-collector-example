@@ -17,11 +17,14 @@ processors:
           - http.client.duration
           - process.runtime.jvm.system.cpu.load_1m
           - process.runtime.jvm.gc.duration
+          - jvm.gc.duration
           - jvm.gc.pause
           - spring.security.filterchains
           - spring.security.http.secured.requests
           - spring.security.authorizations
           - http.server.requests
+          - http.server.request.duration
+          - http.client.request.duration
 
 
 service:
